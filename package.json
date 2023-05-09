@@ -9,10 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.14",
     "@types/node": "20.1.0",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
+    "apollo-server-micro": "^3.12.0",
     "autoprefixer": "10.4.14",
+    "graphql": "^16.6.0",
+    "graphql-tag": "^2.12.6",
     "next": "13.4.1",
     "postcss": "8.4.23",
     "react": "18.2.0",
