@@ -13,5 +13,14 @@ const defaultOptions: DefaultOptions = {
 }
 
 const httpLink = createHttpLink({
-    uri: "http://localhost:4000/graphql",
+    uri: "/api/graphql",
+
 })
+
+const client = new ApolloClient({
+    link: httpLink,
+    cache: new InMemoryCache(),
+    defaultOptions: defaultOptions,
+})
+
+export default client
