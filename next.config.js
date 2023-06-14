@@ -1,22 +1,11 @@
-/** @type {import('next').NextConfig} */
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+module.exports = {
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    // Enable top-level await in webpack
+    config.experiments = {
+      topLevelAwait: true,
+      layers: true,
+    };
 
-const nextConfig = {
-    webpack: (config) => {
-        config.module.rules.push({
-          test: /\.(graphql|gql)$/,
-          exclude: /node_modules/,
-          loader: 'graphql-tag/loader',
-        });
-    
-        // Resolve the @ alias
-        if (!config.resolve.plugins) {
-          config.resolve.plugins = [];
-        }
-        config.resolve.plugins.push(new TsconfigPathsPlugin());
-    
-        return config;
-      }
-}
-
-module.exports = nextConfig
+    return config;
+  },
+};
