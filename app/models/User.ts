@@ -37,7 +37,7 @@ UserSchema.pre('save', async function (next) {
     if (this.isNew || this.isModified('password')) {
         const saltRounds = 10;
         // @ts-ignore
-        this.password = await bcrypt.hash(this.password, saltRounds);
+        this.password = bcrypt.hash(this.password, saltRounds);
     }
 
     next();
@@ -45,6 +45,7 @@ UserSchema.pre('save', async function (next) {
 
 // Custom method to compare and validate password for logging in
 UserSchema.methods.isCorrectPassword = async function (password: string) {
+    console.log(this.password, "this.password")
     return bcrypt.compare(password, this.password);
 };
 
