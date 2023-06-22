@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import User from '../../../models/User';
 import { connectToDatabase } from 'app/lib/utils';
 import { signJWT } from 'app/lib/token';
+import bcrypt from 'bcrypt';
 
 connectToDatabase();
 
@@ -19,6 +20,9 @@ export async function POST(request: Request) {
   // Create a new user
   try {
     const user = await User.create({ name, email, password });
+    // const salt = await bcrypt.genSalt(10);
+    // const hashedPassword = await bcrypt.hash(password, salt);
+    // user.password = hashedPassword;
     const token = await signJWT({ _id: user._id }, { exp: process.env.JWT_EXPIRES_IN as string });
     return NextResponse.json({ user, token }, { status: 200 });
   } catch (error) {
